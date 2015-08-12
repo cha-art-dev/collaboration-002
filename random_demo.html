@@ -1,25 +1,38 @@
 <html>
 <head>
-  <title>Art / Dev - Collaboration 2</title>
+  <title>Art / Dev - Random Demo</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
   <script>
   var IMAGE_WIDTH = 640;    // Don't change this.
   var IMAGE_HEIGHT = 540;   // Don't change this.
 
-  //=============== DO ALL YOUR WORK HERE =======================
 
   function setup() {
     createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    stroke(0,200,255);
+    strokeWeight(2);
+    mark(0);
+
+    stroke(255);
+    strokeWeight(.1);
   }
 
   function draw() {
+    // for (var i=0; i<10; i++) {
+      x = random();
+      mark(x);
+    // }
   }
 
-  // =============== STOP WORKING HERE ==========================
+
+  function mark(x) {
+    var mx = x * IMAGE_WIDTH / 2;
+    line(mx,0,mx,IMAGE_HEIGHT);
+  }
 
   </script>
   <style>
-    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    body { padding: 0; margin: 5% 0 0; background-color: #1e2020;}
     canvas { margin: 0 auto; display:block; }
   </style>
 </head>
