@@ -49,9 +49,7 @@
       var rd = random(0, i);
       var x_pos = mouseX + offset;
       stroke(100, random(100,255), random(100,255));
-      if (x_pos < mouseX || x_pos > mouseX) {
-        point(x_pos, rd);
-      } else if (rd <= mouseY) {
+      if (x_pos < mouseX || x_pos > mouseX || rd <= mouseY) {
         point(x_pos, rd);
       }
     }
