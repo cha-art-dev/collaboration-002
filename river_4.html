@@ -1,0 +1,99 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  var time = 0;
+  var cube = [1];
+  var cubeDim = 50;
+  var o = {x:IMAGE_WIDTH/2, y:IMAGE_HEIGHT/2-60};
+  var anged = 0;
+  var scaleSize = 10;
+  var div = 50;
+
+  function drawCube(x,y,z) {
+    //console.log('drawing cube at: '+o.x+', '+o.y+', anged: '+anged+', scaleSize: '+scaleSize);
+    //cube Point
+    var cp = {};
+    cp.x = o.x + anged*x - anged*y;
+    cp.y = o.y + anged*x + anged*y - z*scaleSize;
+
+    //console.log('cp.x:'+cp.x+', cp.y:'+cp.y);
+
+    fill(55,160,77);
+    quad(cp.x,cp.y,cp.x-anged,cp.y-anged,cp.x-anged,cp.y-anged+scaleSize,cp.x,cp.y+scaleSize);//low-left
+    fill(110,195,225);
+    quad(cp.x,cp.y,cp.x+anged,cp.y-anged,cp.x+anged,cp.y-anged+scaleSize,cp.x,cp.y+scaleSize);//low-right
+    fill(20,115,150);
+    quad(cp.x,cp.y,cp.x-anged,cp.y-anged,cp.x,cp.y-2*anged,cp.x+anged,cp.y-anged);//top
+  }
+
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    background(255,255,255,255);
+
+    anged = sin(45*TWO_PI/360)*scaleSize;
+    //console.log(sin(90*TWO_PI/360));
+    //quad(0,0,0,100,100,100,100,0);
+    //fill(20,115,150);
+    //quad(0,0,0,200,100,10,300,0);
+
+
+    for (var x=0; x<cubeDim; x++) {
+      cube[x] = []; // the secret key to initializing 2d array
+      for (var y=0; y<cubeDim; y++) {
+
+        var z = floor(noise(x,y)*(cubeDim+1));
+
+        //console.log(cube[0]);
+        cube[x][y] = z;
+
+        //console.log('x: '+x+', y: '+y+', z: '+cube[x][y]);
+
+        //drawCube(x,y,z);
+        
+
+      }
+    }
+
+
+  }
+
+  function draw() {
+    time = time +1;
+    //console.log(time);
+
+    clear();
+    //background(102,102,102,5);
+    //fill(255);
+    stroke(0);
+
+    for (var x=0; x<cubeDim; x++) {
+      for (var y=0; y<cubeDim; y++) {
+        var z = floor(noise((x+time)/div,y/div)*(cubeDim+1));
+        //console.log('x: '+x+', y: '+y+', z: '+z);
+        drawCube(x,y,z);
+
+      }
+    }
+
+
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
