@@ -1,0 +1,62 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    strokeWeight(3);
+    background(0,0,0);
+
+  }
+
+  function draw() {
+    clear();
+    background(0,0,0);
+
+   /* Kinda looks like raden: https://en.wikipedia.org/wiki/Raden */
+
+    rain(80);
+    rain(70);
+    rain(60);
+    rain(50);
+    rain(40);
+    rain(30);
+    rain(20);
+    rain(10);
+    rain(0);
+    rain(-80);
+    rain(-70);
+    rain(-60);
+    rain(-50);
+    rain(-40);
+    rain(-30);
+    rain(-20);
+    rain(-10);
+
+  }
+
+  function rain(offset) {
+    fill(240,248,255);
+    for (i = 0; i < IMAGE_HEIGHT - 100; i++) { 
+      stroke(100,random(100,255),random(100,255));
+      point(mouseX + offset, random(0,i));
+    }
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
