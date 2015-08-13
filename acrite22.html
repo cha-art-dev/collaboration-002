@@ -1,0 +1,68 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+  var myColor = 127;
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+//      colorMode(HSB);
+  }
+
+  function raindrops() {
+      var x, y,
+        cursorFollowRange = 300,
+        maxCircle = 30,
+        radius = noise(random()) * maxCircle;
+
+      noStroke();
+      background(0, 0, 0, 20);
+      fill(myColor, myColor, myColor + random() * 127);
+
+      if (mouseX > 0 && mouseX <= IMAGE_WIDTH &&
+        mouseY > 0 && mouseY <= IMAGE_HEIGHT) {
+          x = mouseX + random() * cursorFollowRange - (cursorFollowRange/2);
+          y = mouseY + random() * cursorFollowRange - (cursorFollowRange/2);
+      } else {
+          x = random() * IMAGE_WIDTH;
+          y = random() * IMAGE_HEIGHT;
+      }
+      ellipse(x, y, radius, radius);
+  }
+
+//  function test2() {
+//      console.log('test2');
+//      var myColor, r, g, b;
+//      for (var x=0; x<IMAGE_WIDTH; x++) {
+//          for (var y=0; y<IMAGE_HEIGHT; y++) {
+//              r = g = b = random() * 255;
+////              r = g = b = noise(x,y) * 255;
+//              myColor = color(r, g, b);
+//              fill(myColor);
+//              rect(x,y,1, 1);
+//          }
+//      }
+////      updatePixels();
+//  }
+
+  function draw() {
+      raindrops();
+//      test2();
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
