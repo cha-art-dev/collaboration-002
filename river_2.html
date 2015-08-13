@@ -1,0 +1,62 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  var time = 0;
+  var radius = 0;
+  var riples = 100;
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    stroke(0,0,0,0);
+    background(255,255,255,5);
+  }
+
+  function draw() {
+    time = time +1;
+    //console.log(time);
+
+    //clear();
+    //background(255,255,255,5);
+    //fill(255);
+
+    for (var x=riples; x>0; x--) {
+      //strokeWeight(55);
+      fill(noise(time*x/1000)*255);//x*255/riples);
+      radius = 2000*x/riples;
+      ellipse(mouseX,mouseY,radius,radius);
+    }
+
+
+
+  }
+
+//stats!!!
+  // randomGaussian(0); // normal bell curve randomGaussian(mean,stdev)
+  // pow(random(),3); // random 0-1 to power of 3
+
+//noise
+  // perlin noise
+  // use point, not set
+
+
+
+
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; background-color: white;}
+  </style>
+</head>
+<body>
+</body>
+</html>
