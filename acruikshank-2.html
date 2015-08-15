@@ -1,0 +1,79 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  var MAX_COUNT = 20;
+  var END_RADIUS = 600;
+  var CTL_SCALE = 10;
+  var MIN_CIRC_RADIUS = 2;
+  var MAX_CIRC_RADIUS = 100;
+  var start, end, last, count = MAX_COUNT+1;
+
+  function V(x,y) {
+    var o = {
+      x:x, y:y,
+      add:function(v) { return V(x+v.x,y+v.y) },
+      scale:function(s) { return V(s*x,s*y) },
+      sub:function(v) { return o.add(v.scale(-1)) },
+    }
+    return o;
+  }
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    stroke(255);
+    noFill();
+  }
+
+  function draw() {
+    if (last && last.x == mouseX && last.y == mouseY)
+      return;
+
+    strokeWeight(.24);
+    fill(lerpColor(color(80,102,40,10), color(82,162,182,20), random()));
+    var mouse = V(mouseX, mouseY);
+    if (!last) last = mouse;
+    if (count > MAX_COUNT) {
+      start = mouse;
+      end = start.add(V(random()-.5, random()-.5).scale(2*END_RADIUS));
+      count = 0;
+    }
+    var ctl1 = mouse.add(last.sub(mouse).scale(CTL_SCALE));
+    var ctl2 = ctl1.add(V(noise(mouseX)-.5, noise(mouseY)-.5).scale(2*END_RADIUS));
+    // bezier(start.x,start.y,ctl.x,ctl.y,ctl.x,ctl.y,end.x,end.y);
+    bezier(mouse.x,mouse.y,ctl1.x,ctl1.y,ctl2.x,ctl2.y,end.x,end.y);
+
+    if (random() < .2) {
+      var s = random();
+      var x = bezierPoint(mouse.x,ctl1.x,ctl2.x,end.x, s);
+      var y = bezierPoint(mouse.y,ctl1.y,ctl2.y,end.y, s);
+      var r = MAX_CIRC_RADIUS * pow(random(),8);
+      fill(r < 8 ? color(255,255,255,255) : color(102,102,102,255));
+      strokeWeight(.5);
+      ellipse(x,y,r,r);
+    }
+
+    if (random() < .001)
+      background(102,102,102);
+
+    last = mouse;
+    count++;
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
