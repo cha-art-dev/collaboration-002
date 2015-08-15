@@ -1,0 +1,77 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  var time = 0;
+  var cube = [1];
+  var cubeDim = 50;
+  var o = {x:IMAGE_WIDTH/2, y:IMAGE_HEIGHT/2-60};
+  var anged = 0;
+  var scaleSize = 10;
+  var div = 50;
+  var shade = 3; // arbitrary factor
+
+  function drawQuad(x,y) {
+    // rough approximation of gradient for shading
+    var gradient = cube[x-1][y-1].x - cube[x][y].x + cube[x-1][y-1].y - cube[x][y].y;
+    fill(45+gradient*shade,140+gradient*shade,67+gradient*shade);
+    //console.log('drawing quad');
+    quad(cube[x][y].x,cube[x][y].y,cube[x-1][y].x,cube[x-1][y].y,cube[x-1][y-1].x,cube[x-1][y-1].y,cube[x][y-1].x,cube[x][y-1].y);//low-left
+
+  }
+
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    background(255,255,255,255);
+    anged = sin(45*TWO_PI/360)*scaleSize;
+
+    for (var x=0; x<cubeDim; x++) {
+      cube[x] = []; // the secret key to initializing 2d array
+    }
+
+  }
+
+  function draw() {
+    time = time +1;
+
+    //clear();
+    stroke(0);
+
+    if (time === 1){//******************************
+
+    for (var x=0; x<cubeDim; x++) {
+      for (var y=0; y<cubeDim; y++) {
+        var z = floor(noise((x+time)/div,y/div)*(cubeDim+1));
+        cube[x][y] = {x: o.x + anged*x - anged*y, y: o.y + anged*x + anged*y - z*scaleSize};
+        if (y===0 || x===0){
+
+        }else{
+          //console.log(cube[x][y].x+', '+cube[x][y].y+', '+cube[x-1][y].x+', '+cube[x-1][y].y+', '+cube[x-1][y-1].x+', '+cube[x-1][y-1].y+', '+cube[x][y-1].x+', '+cube[x][y-1].y);
+          drawQuad(x,y);
+        }
+      }
+    }
+
+    }//else{console.log('time /= 1');}
+                    //************************************
+
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  var blocksize = 80;
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    }
+
+  function draw() {
+    noStroke();
+    var r, g, b, n;
+    var s = 10;
+    //  var offset = 100;
+    var offset = millis() /100;
+    // var lod = .2;
+    // var falloff = .2;
+    // noiseDetail(lod,falloff);
+       for (var x=0, lx=IMAGE_WIDTH/blocksize; x<lx; x++) {
+       for (var y=0, ly=IMAGE_HEIGHT/blocksize; y<lx; y++) {
+    //  n = noise(x*s,y*s);
+    //  n = noise(x*s, y*s, offset)
+      n = noise(x*s, y*s, offset)
+        r = g = b = n*10;
+        r = 240 - 100*abs(.1-n);
+        g = 100 - 300*abs(.1-n);
+        b = 100 - 200*abs(.1-n);
+        c = color(r,g,b);
+        fill(c);
+        rect(x*blocksize, y*blocksize, blocksize, blocksize);
+      }
+    }
+}
+function mousePressed() {
+  remove(); // remove whole sketch on mouse press
+}
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  <style>
+</head>
+<body>
+</body>
+</html>
