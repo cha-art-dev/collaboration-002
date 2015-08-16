@@ -1,0 +1,53 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  var time = 0;
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    background(255,255,255,255);
+    strokeWeight(5);
+    stroke(0);
+
+
+  }
+
+  function draw() {
+    time = time +1;
+
+    //clear();
+    //fill(0,255*mouseX/IMAGE_WIDTH,0, 100);
+    translate(IMAGE_WIDTH/2, IMAGE_HEIGHT/2); // translates origin
+    rotate(PI/(mouseY/IMAGE_HEIGHT)); // sets rotation about origin
+
+    fill(255*mouseX/IMAGE_WIDTH,0, 0, 100);
+    rect(0,0,30,30); // now draws in shifted coords
+
+    fill(0,0,255*mouseX/IMAGE_WIDTH, 100);
+    rect(30,30,100,100); // now draws in shifted coords
+
+    fill(0,255*mouseX/IMAGE_WIDTH,0, 100);
+    rect(100,100,200,200); // now draws in shifted coords
+
+//??? why overlap??
+
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>

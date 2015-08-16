@@ -1,0 +1,62 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  var time = 0;
+  var slices = 300;
+  var points = [];
+  var iRad = 300;
+  //var bRad = 10; // diff btw outer and inner radii
+  var dbi = 0.5; // diff outer - inner / inner
+  var o = {x: IMAGE_WIDTH/2, y: IMAGE_HEIGHT/2};
+  var follow = {x: IMAGE_WIDTH/2, y: IMAGE_HEIGHT/2};
+  var followRate = 0.00001;
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    background(255,255,255,255);
+    strokeWeight(5);
+    stroke(0);
+
+
+  }
+
+  function draw() {
+    time = time +1;
+
+    clear();
+
+// follow isn't working...
+    var mouseDiff = {x: mouseX-follow.x, y: mouseY - follow.y};
+    iRad = abs(follow.x-o.x) + abs(follow.y-o.y);
+    follow.x += mouseDiff.x * followRate;
+    follow.y += mouseDiff.y * followRate;
+    follow = {x: mouseX,y: mouseY};
+
+    for (var p=0; p<slices; p++) {
+      var ang = TWO_PI*p/slices;
+      points[p] = {x: iRad*sin(ang), y: iRad*cos(ang), ang: ang};
+      var inoise = noise(sin(ang), time/200);
+      var onoise = noise(sin(ang), time/100);
+      line(inoise*points[p].x+o.x, inoise*points[p].y+o.y, onoise*dbi*points[p].x+o.x, onoise*dbi*points[p].y+o.y);
+    }
+
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
