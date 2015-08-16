@@ -1,0 +1,37 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+  var backgrounColor;
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    noStroke();
+  }
+
+  function draw() {
+  //background(0);
+
+
+  stroke(255);
+  fill(46*noise(mouseY), 143, 255);
+  triangle(mouseX, mouseY, 0, 600, 600, 6000*random());
+  stroke(255);
+  line(mouseX, mouseY, 1, 1)
+}
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
