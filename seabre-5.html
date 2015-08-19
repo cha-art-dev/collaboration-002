@@ -11,6 +11,8 @@
   var xoff = 0.0;
   var rot = 0;
   var cycl = 0;
+  var rand_x = 0;
+  var rand_y = 0;
   var palette = [
     [248, 177, 149],
     [246, 114, 128],
@@ -37,6 +39,8 @@
 
   function setup() {
     createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    rand_x = random(0, floor(IMAGE_WIDTH / 2));
+    rand_y = random(0, floor(IMAGE_HEIGHT / 2));
     background(255,255,255);
   }
 
@@ -46,37 +50,37 @@
     xoff = xoff + 0.1;
 
     pline({
-      x1: 85,
-      y1: 20,
-      x2: 85,
-      y2: 75,
+      x1: rand_x,
+      y1: rand_y,
+      x2: rand_x,
+      y2: rand_y + 55,
       noisefn: function() { return sin(noise(xoff * random()));},
       stroke: choose_from_palette(clr_choice, 10),
       strokeWeight: 3});
 
     pline({
-      x1: 85,
-      y1: 20,
-      x2: 85,
-      y2: 75,
+      x1: rand_x,
+      y1: rand_y,
+      x2: rand_x,
+      y2: rand_y + 55,
       noisefn: function() { return sin(noise(xoff * random()));},
       stroke: choose_from_palette(clr_choice, 50),
       strokeWeight: 1});
 
     pline({
-      x1: 85,
-      y1: 20,
-      x2: 85,
-      y2: 75,
+      x1: rand_x,
+      y1: rand_y,
+      x2: rand_x,
+      y2: rand_y + 55,
       noisefn: function() { return sin(noise(xoff * random()));},
       stroke: choose_from_palette(clr_choice, 50),
       strokeWeight: 1});
 
     pline({
-      x1: 85,
-      y1: 20,
-      x2: 85,
-      y2: 75,
+      x1: rand_x,
+      y1: rand_y,
+      x2: rand_x,
+      y2: rand_y + 55,
       noisefn: function() { return sin(noise(xoff * random()));},
       stroke: choose_from_palette(clr_choice, 50),
       strokeWeight: 1});
