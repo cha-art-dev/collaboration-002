@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+  var once = true;
+  var lastX;
+  var lastY;
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    colorMode(HSB);
+  }
+
+  function tunnel() {
+      if(lastX != mouseX || lastY != mouseY) {
+          lastX = mouseX;
+          lastY = mouseY;
+      }
+      fill(noise(mouseX) * 255, mouseX / IMAGE_WIDTH  * 255, mouseY / IMAGE_HEIGHT * 255);
+      ellipse(IMAGE_WIDTH / 2, IMAGE_HEIGHT / 2, mouseX, mouseY);
+  }
+
+  function draw() {
+      if(once) {
+          once = false;
+          background(0,0,0);
+          strokeWeight(80);
+          fill(127, 127, 127);
+          ellipse(IMAGE_WIDTH / 2, IMAGE_HEIGHT / 2, 400, 400);
+          ellipse(IMAGE_WIDTH / 2, IMAGE_HEIGHT / 2, 200, 200);
+      }
+      tunnel();
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
