@@ -24,10 +24,13 @@
     }
     // background(.5,0,.4,.02)
 
-    fill(.5,0,.4,.6)
-    stroke(1,0,1,1);
-    var r = lerp(1,600, Math.pow(random(),60));
-    ellipse(mouseX,mouseY,r,r);
+    // fill(.5,0,.4,.8)
+    // stroke(1,0,1,1);
+    // var r = lerp(1,800, Math.pow(random(),60));
+    //ellipse(mouseX,mouseY,r,r);
+
+    if (random() < .005)
+      background(.5,0,.4,1);
 
     noStroke();
 
