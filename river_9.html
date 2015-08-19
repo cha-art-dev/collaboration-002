@@ -1,0 +1,86 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  var time = 0;
+  var lastTime = 0;
+  var groundY = 0;
+  var guy = {x: 200, y: 0, vx: 0, vy: 0, rad: 30};
+  var gravity = 0.001;
+  var bounce = 0.01;// if stop when hit ground use 0.01;
+  var jump = 0.3;
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    //yoffset = 200*IMAGE_HEIGHT/3;
+  }
+
+  function draw() {
+    lastTime = time;
+    time = millis();
+    dt = time-lastTime;
+
+    clear();
+    //background(102,102,102,5);
+    fill(255);
+    stroke(0);
+    //ellipse(mouseX,mouseY,100,100); // mouseX and Y use canvas top left as origin
+    //t = [0,5,-4,-3,4,-3];
+    //triangle(mouseX + t[0],mouseY+t[1],mouseX + t[2],mouseY+t[3],mouseX + t[4],mouseY+t[5])
+    for (var x=0; x<IMAGE_WIDTH; x++) {
+      n = noise((x+time/5)/300);//+mouseX/IMAGE_WIDTH)/300
+      y = 200+n*IMAGE_HEIGHT/2;
+      //m = noise(time/200);
+      //o = noise(time/100);
+      p = noise(x/100);
+      line(x,y,x,IMAGE_HEIGHT); // +100*p
+
+      if (x === guy.x) {groundY = y;}// requires integer guy.x val
+    }
+
+    // update, just in draw for now
+    if (guy.y < groundY){ // above ground: y is inverted
+      guy.vy += gravity*dt;// increase downward vel
+    }else{// touching ground
+      if (guy.vy > 0) {guy.vy = 0;}// if moving down, stop moving
+      guy.vy -= (guy.y-groundY)*bounce;
+    }
+    guy.y += guy.vy*dt;//increase y (move down) by downward vel
+
+    fill(100,100,230);
+    ellipse(guy.x,guy.y-guy.rad/2,guy.rad,guy.rad);
+    //console.log(guy.x+', '+guy.y);
+  }
+
+  function mousePressed() {
+    if (guy.y > groundY - 10) {
+      guy.vy -= jump;
+    }
+  }
+
+//stats!!!
+  // randomGaussian(0); // normal bell curve randomGaussian(mean,stdev)
+  // pow(random(),3); // random 0-1 to power of 3
+
+//noise
+  // perlin noise
+  // use point, not set
+
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; background-color: white; }
+  </style>
+</head>
+<body>
+</body>
+</html>

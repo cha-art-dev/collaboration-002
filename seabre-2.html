@@ -8,6 +8,8 @@
 
   //=============== DO ALL YOUR WORK HERE =======================
 
+  var MAX_DROP_HEIGHT = IMAGE_HEIGHT - 100;
+
   function setup() {
     createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
     strokeWeight(3);
@@ -43,9 +45,13 @@
 
   function rain(offset) {
     fill(240,248,255);
-    for (i = 0; i < IMAGE_HEIGHT - 100; i++) { 
-      stroke(100,random(100,255),random(100,255));
-      point(mouseX + offset, random(0,i));
+    for (i = 0; i < MAX_DROP_HEIGHT; i++) {
+      var rd = random(0, i);
+      var x_pos = mouseX + offset;
+      stroke(100, random(100,255), random(100,255));
+      if (x_pos < mouseX || x_pos > mouseX || rd <= mouseY) {
+        point(x_pos, rd);
+      }
     }
   }
 

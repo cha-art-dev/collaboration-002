@@ -1,0 +1,141 @@
+ <html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+  }
+
+  function draw() {
+   background(20, 20, 20);
+   stroke(255);
+   fill(255);
+   noiseDetail(8,.3);
+  // var s = .01;
+   //var n1 = noise(millis()*s);
+  // var n2 = noise(millis()*s + 100);
+  // var n3 = noise(millis()*s + 200);
+  // var n4 = noise(millis()*s + 300);
+  // var n5 = noise(millis()*s + 400);
+
+   fill(255*random(), 255*random(), 255*random());
+   ellipse(mouseX*random(), mouseY*random(), 10*noise(mouseY), 10*noise(mouseY));
+   ellipse(mouseX*random(), mouseY, 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX, mouseY*random(), 10*noise(mouseY), 10*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 40*noise(mouseY), 40*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 40*noise(mouseY), 40*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 40*noise(mouseY), 40*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 40*noise(mouseY), 40*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 40*noise(mouseY), 40*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 40*noise(mouseY), 40*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 300*noise(mouseY), 300*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 40*noise(mouseY), 40*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 40*noise(mouseY), 40*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 200*noise(mouseY), 200*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 40*noise(mouseY), 40*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 40*noise(mouseY), 40*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 20*noise(mouseY), 20*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 100*noise(mouseY), 100*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 40*noise(mouseY), 40*noise(mouseY));
+   ellipse(mouseX*random(), mouseY*random(), 5*noise(mouseY), 5*noise(mouseY));
+
+   fill(255);
+   ellipse(mouseX, mouseY, 100*random(), 50*random());
+  //ellipse(mouseX, mouseY, 10, 10);
+
+  // fill(255);
+  // ellipse(mouseX, mouseY, 10, 10);
+  // line(mouseX, mouseY*noise(mouseY), 1, 1);
+   // line(mouseX, mouseY, 1, 1);
+   //rect(mouseX, mouseY*random(), 1*noise(mouseX), 600*noise(mouseY));
+
+// playing with noise
+
+// var r, g, b, n;
+// var s = .01;
+// var offset = 100;
+// var lod = 5;
+// var falloff = .1;
+// noiseDetail(lod,falloff);
+// for (var x=0; x<IMAGE_WIDTH; x++) {
+//   for (var y=0; y<IMAGE_HEIGHT; y++) {
+//     n = noise(x*s);
+//     r = g = b = n*255;
+//     r = 200 - 10000*abs(.5-n);
+//     g = 230 - 3000*abs(.5-n);
+//     b = 255 - 2000*abs(
+//     c = color(r,g,b);
+//     set(x,y,c);
+//   }
+// }
+// updatePixels();
+// }
+
+
+    //line(mouseX, mouseY, 100*noise(mouseX), 100);//*noise(mouseY));
+
+}
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
