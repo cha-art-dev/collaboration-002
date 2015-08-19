@@ -1,0 +1,98 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  var xoff = 0.0;
+  var rot = 0;
+  var cycl = 0;
+  var palette = [
+    [248, 177, 149],
+    [246, 114, 128],
+    [192, 108, 132],
+    [108, 91, 123],
+    [53, 92, 125]];
+
+  function choose_from_palette(clrc, a) {
+    var clr = palette[clrc];
+
+    clr.push(a);
+
+    return clr;
+  }
+
+  function pline(args){
+    stroke(args.stroke);
+    strokeWeight(args.strokeWeight);
+    var n = args.noisefn() * IMAGE_WIDTH;
+    translate(n, n);
+    rotate(radians(rot));
+    line(args.x1, args.y1, args.x2, args.y2);
+  }
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    background(255,255,255);
+  }
+
+  function draw() {
+    var clr_choice = cycl % palette.length;
+
+    xoff = xoff + 0.1;
+
+    pline({
+      x1: 85,
+      y1: 20,
+      x2: 85,
+      y2: 75,
+      noisefn: function() { return sin(noise(xoff * random()));},
+      stroke: choose_from_palette(clr_choice, 10),
+      strokeWeight: 3});
+
+    pline({
+      x1: 85,
+      y1: 20,
+      x2: 85,
+      y2: 75,
+      noisefn: function() { return sin(noise(xoff * random()));},
+      stroke: choose_from_palette(clr_choice, 50),
+      strokeWeight: 1});
+
+    pline({
+      x1: 85,
+      y1: 20,
+      x2: 85,
+      y2: 75,
+      noisefn: function() { return sin(noise(xoff * random()));},
+      stroke: choose_from_palette(clr_choice, 50),
+      strokeWeight: 1});
+
+    pline({
+      x1: 85,
+      y1: 20,
+      x2: 85,
+      y2: 75,
+      noisefn: function() { return sin(noise(xoff * random()));},
+      stroke: choose_from_palette(clr_choice, 50),
+      strokeWeight: 1});
+
+    rot += 0.5;
+    cycl += 1;
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
