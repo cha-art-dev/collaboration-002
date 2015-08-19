@@ -15,18 +15,19 @@
 
   function draw() {
     var r, g, b, n;
-    var s = .01;
-    var offset = 100;
-    // var lod = 5;
-    // var falloff = .5;
-    // noiseDetail(lod,falloff);
+    var s = .1;
+//    var offset = 100;
+    var offset = millis() / 400;
+     var lod = 8;
+     var falloff = .2;
+     noiseDetail(lod,falloff);
     for (var x=0; x<IMAGE_WIDTH; x++) {
       for (var y=0; y<IMAGE_HEIGHT; y++) {
-        n = noise(x*s);
+        n = noise(x*s, y*s, offset);
         r = g = b = n*255;
-        // r = 200 - 10000*abs(.5-n);
-        // g = 230 - 3000*abs(.5-n);
-        // b = 255 - 2000*abs(.5-n);
+         r = 200 - 10000*abs(.5-n);
+         g = 230 - 3000*abs(.5-n);
+         b = 255 - 2000*abs(.5-n);
         c = color(r,g,b);
         set(x,y,c);
       }

@@ -10,19 +10,28 @@
 
   function setup() {
     createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    colorMode(HSB);
+  }
+
+  function squareEyeAssault() {
+      var x, y, boxCurrent,
+        boxMin=60,
+        boxAdditional=30;
+
+      stroke(0);
+      strokeWeight(8);
+
+      x = random() * IMAGE_WIDTH;
+      y = random() * IMAGE_HEIGHT;
+      boxCurrent = random() * boxAdditional + boxMin;
+
+      fill(random() * 255, 127, 127);
+      rect(x, y, boxCurrent, boxCurrent);
+
   }
 
   function draw() {
-//    background(102,102,102,100);
-//    fill((mouseX+mouseY)/4);
-    stroke((mouseX+mouseY)/4);
-//    noStroke();
-//    stroke(9);
-    var x = noise(random()) * IMAGE_WIDTH;
-    var y = noise(random()) * IMAGE_HEIGHT;
-    console.log(x);
-    console.log(y);
-    line(x,y,mouseX,mouseY);
+      dontBeSquare();
   }
 
   // =============== STOP WORKING HERE ==========================
