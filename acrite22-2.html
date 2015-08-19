@@ -1,7 +1,7 @@
 <html>
 <head>
   <title>Art / Dev - Collaboration 2</title>
-  <script src="p5.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
   <script>
   var IMAGE_WIDTH = 640;    // Don't change this.
   var IMAGE_HEIGHT = 540;   // Don't change this.
@@ -10,9 +10,28 @@
 
   function setup() {
     createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    colorMode(HSB);
+  }
+
+  function squareEyeAssault() {
+      var x, y, boxCurrent,
+        boxMin=60,
+        boxAdditional=30;
+
+      stroke(0);
+      strokeWeight(8);
+
+      x = random() * IMAGE_WIDTH;
+      y = random() * IMAGE_HEIGHT;
+      boxCurrent = random() * boxAdditional + boxMin;
+
+      fill(random() * 255, 127, 127);
+      rect(x, y, boxCurrent, boxCurrent);
+
   }
 
   function draw() {
+      dontBeSquare();
   }
 
   // =============== STOP WORKING HERE ==========================

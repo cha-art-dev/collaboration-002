@@ -1,7 +1,7 @@
 <html>
 <head>
   <title>Art / Dev - Random Demo</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
   <script>
   var IMAGE_WIDTH = 640;    // Don't change this.
   var IMAGE_HEIGHT = 540;   // Don't change this.
@@ -19,7 +19,7 @@
 
   function draw() {
     // for (var i=0; i<10; i++) {
-      x = random();
+      x = pow(randomGaussian(),8);
       mark(x);
     // }
   }
