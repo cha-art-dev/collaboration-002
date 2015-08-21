@@ -1,0 +1,45 @@
+<html>
+<head>
+  <title>Art / Dev - Noise Demo</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 500;    // Don't change this.
+  var IMAGE_HEIGHT = 500;   // Don't change this.
+
+  var y = 100;
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    frameRate(15);
+    stroke(random(255));
+
+    document.querySelector('canvas').setAttribute('style', 'width:500px; height: 500px')
+  }
+
+  function draw() {
+
+    background(126, 126, 0, 126);   // Set the background to black
+
+        for (var i = 0; i < height; i++) {
+
+          y = y - 1;
+          if (y < 0) {
+            y = height;
+          }
+          line(0, y, width, y);
+          stroke(random(0, 255), random(0, 255), random(0, 255));
+          strokeWeight(random(1, 50));
+        }
+}
+
+
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #1e2020;}
+    canvas { width:100%; height:100%; margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
