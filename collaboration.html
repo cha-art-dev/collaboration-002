@@ -1,0 +1,287 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="p5.min.js"></script>
+  <script>
+  var ACTUAL_WIDTH = 910;
+  var ACTUAL_HEIGHT = 540;
+  var SKETCH_WIDTH = ACTUAL_WIDTH / 3;
+  var SKETCH_HEIGHT = ACTUAL_HEIGHT / 2;
+  var IMAGE_WIDTH = 640;
+  var IMAGE_HEIGHT = 540;
+  var MAX_COST = 8;
+  var AUTO_MOUSE_DELAY = 20000;
+  var SCALE = Math.min(SKETCH_WIDTH/IMAGE_WIDTH, SKETCH_HEIGHT/IMAGE_HEIGHT);
+  var files = [{ file: 'mhelenm-1', overlays: true, cost: .019 },
+                { file: 'mhelenm-2', overlays: true, cost: .022 },
+                { file: 'mhelenm-3', overlays: true, cost: .025 },
+                { file: 'benjaminleeschnell-1', overlays: true, cost: .358 },
+                { file: 'benjaminleeschnell-2', overlays: false, cost: .036 },
+                { file: 'benjaminleeschnell-3', overlays: false, cost: .031 },
+                { file: 'acrite22', overlays: true, cost: .032 },
+                { file: 'acrite22-3', overlays: true, cost: .019 },
+                { file: 'HLV3H2random', overlays: false, cost: .055 },
+                { file: 'acruikshank-4', overlays: true, cost: .140 },
+                { file: 'acruikshank-2', overlays: true, cost: 1.40 },
+                { file: 'acruikshank-1', overlays: true, cost: .026 },
+                { file: 'acruikshank-3', overlays: true, cost: .155 },
+                { file: 'skohlhorst-1', overlays: true, cost: .016 },
+                { file: 'seabre-5', overlays: true, cost: .014 },
+                { file: 'river_1', overlays: false, cost: 5.20 },
+                { file: 'river_2', overlays: false, cost: 1.93 },
+                { file: 'river_6', overlays: true, cost: 1.69 },
+                { file: 'river_8', overlays: true, cost: .050 },
+                { file: 'river_10', overlays: true, cost: .043 }];
+
+  var scripts = [];
+  var currentSketches = [];
+  var overlays = [];
+  var totalCost = 0;
+  var lastX, lastY, autoMouse, lastMovement = new Date().getTime();
+
+  function setup() {
+    createCanvas(ACTUAL_WIDTH, ACTUAL_HEIGHT);
+    windowResized();
+    loadFiles(resetSketches);
+    lastX = mouseX;
+    lastY = mouseY;
+  }
+
+  function draw() {
+    var canvas = document.getElementById("defaultCanvas");
+    var ctx = canvas.getContext('2d');
+    var mx = mouseX, my = mouseY;
+
+    // use the automouse if we've waited long enough
+    var now = new Date().getTime();
+    if (mx == lastX && my == lastY) {
+      if (now - lastMovement > AUTO_MOUSE_DELAY) {
+        if (! autoMouse)
+          autoMouse = AutoMouse( windowWidth/4, windowHeight/4, windowWidth, windowHeight);
+        var pos = autoMouse.step();
+        mx = pos.x, my = pos.y;
+      }
+    } else {
+      autoMouse = null;
+      lastMovement = now;
+    }
+
+    // actually do the drawing here
+    currentSketches.forEach(function (sketch) { runSketch(sketch, mx, my, ctx); });
+    overlays.forEach(function (sketch) { runSketch(sketch, mx, my, ctx); });
+
+    // change a schedule based on a random interval
+    if (Math.random() < .01)
+      resetSketches();
+
+    if (Math.random() < .01)
+      resetOverlays();
+
+    lastX = mouseX;
+    lastY = mouseY;
+  }
+
+  function runSketch(sketch, mx, my, ctx, initialize) {
+    if (! sketch) return;
+    var sketchScale = SCALE * (sketch.overlay ? 2 : 1);
+
+    push();
+    var x = sketch.x*SKETCH_WIDTH;
+    var y = sketch.y*SKETCH_HEIGHT;
+    translate(x, y);
+    scale(sketchScale, sketchScale);
+    strokeWeight(1);
+    colorMode(RGB,255);
+    var script = sketch.script;
+    var clipScale = sketch.overlay ? 2 : 1;
+    script.clip(ctx, 0,0, SKETCH_WIDTH/sketchScale*clipScale, SKETCH_HEIGHT/sketchScale*clipScale);
+    script.setMouse((mx - x)/sketchScale, (my - y)/sketchScale);
+
+    var start = new Date().getTime();
+    script.setSetupMode(!initialize);
+    script.setup();
+    script.setSetupMode(sketch.overlay);
+    script.draw();
+
+    sketch.sketch[sketch.overlay ? 'overlayTime' : 'time'] += new Date().getTime() - start;
+    sketch.sketch[sketch.overlay ? 'overlayCount' : 'count']++;
+    pop();
+  }
+
+  // EVENTS TO DEAL WITH SCREEN SIZE
+
+  function mousePressed() {
+    fullscreen(true);
+  }
+
+  function windowResized() {
+    ACTUAL_WIDTH = windowWidth;
+    ACTUAL_HEIGHT = windowHeight;
+    resizeCanvas(ACTUAL_WIDTH, ACTUAL_HEIGHT);
+    SKETCH_WIDTH = ACTUAL_WIDTH / 3;
+    SKETCH_HEIGHT = ACTUAL_HEIGHT / 2;
+  }
+
+  // FUNCTIONALITY TO UPDATE SKETCHES
+
+  function resetSketches() {
+    var slot = (Math.random() * 6)|0;
+    var sketch = resetSlot(currentSketches, slot, sketchAvailable());
+    currentSketches[slot] = (sketch
+      ? {script:sketch.script, sketch:sketch, x:slot%3, y:(slot/3)|0}
+      : null)
+  }
+
+  function resetOverlays() {
+    var slot = (Math.random() * 2)|0;
+    var sketch = resetSlot( overlays, slot, sketchAvailable(true) );
+    overlays[slot] = (sketch
+      ? {script:sketch.script, sketch:sketch, x:slot%2, y:0, overlay:true}
+      : null)
+  }
+
+  function resetSlot(container, slot, freePredicate) {
+    if (container[slot]) {
+      container[slot].sketch.checkedout = false;
+      totalCost -= container[slot].sketch.cost;
+    }
+    container[slot] = null;
+
+    var freeScripts = scripts.filter(freePredicate);
+    if (! freeScripts.length) return;
+
+    var sketch = freeScripts[(freeScripts.length*Math.random())|0];
+    sketch.checkedout = true;
+    totalCost += sketch.cost;
+    return sketch;
+  }
+
+  function sketchAvailable(overlay) {
+    return function(sketch) {
+      return !sketch.checkedout && (!overlay || sketch.overlays)
+        && (sketch.cost < MAX_COST - totalCost);
+    }
+  }
+
+  // LOAD SKETCHES AND MODIFY THEM TO WORK IN COLLABORATION
+
+  function loadFiles(cb) {
+    files.reduce(function(cb,file) {
+      return function() {
+        loadPage(file.file, function(html) {
+          var contents = drawTemplate.toString().match(/\{([\S\s]*)\}/)[1];
+          var substituted = contents.replace(/\/\/ code goes here/, extractScript(html));
+          scripts.push({
+            file: file.file,
+            script:new Function('oldBackground',substituted)(background),
+            overlays: file.overlays,
+            slow: file.slow,
+            checkedout: false,
+            cost: file.cost,
+            time: 0,
+            count: 0,
+            overlayTime: 0,
+            overlayCount: 0
+          });
+          cb();
+        });
+      }
+    }, cb)();
+  }
+
+  function extractScript(html) {
+    return Array.prototype.map.call(html.querySelectorAll('script'), parseScript)
+                .filter(function(s){return s})[0];
+  }
+
+  function parseScript(script) { return script.innerHTML; }
+
+  function loadPage(page, cb) {
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function() { cb(this.responseXML); };
+    xhr.open("GET", page+".html");
+    xhr.responseType = "document";
+    xhr.send();
+  }
+
+  // SKETCH FILES GET MIXED INTO THIS FUNCTION
+
+  function drawTemplate(oldBackground) {
+    // code goes here
+
+    var mouseX, mouseY, isSetup=false;
+    function setMouse(x,y) { mouseX = x; mouseY = y; }
+    function createCanvas() {};
+    function clear() {};
+    function background() { if (!isSetup) return oldBackground.apply(this,arguments); };
+    var document = {querySelector: function() { return {setAttribute:function() {}}}};
+
+    return {
+      setup:setup, draw:draw,
+      setMouse:setMouse,
+      clip:function(ctx,x,y,w,h) {
+        ctx.beginPath();
+        ctx.rect(x,y,w,h);
+        ctx.clip();
+      },
+      setSetupMode: function(setupMode) { isSetup = setupMode; }
+    };
+  }
+
+  // MOVES MOUSE ALONG A CONTINUOUS PATH
+
+  function AutoMouse(x,y, width, height) {
+    var center = V(width/2, height/2);
+    var pos = V(x,y);
+    var v = V(0,0);
+    var targetVelocity = 10;
+    var distraction = .3;
+    var MAX_DISTRACTION = .5;
+    var WALL_FORCE = 10000;
+
+    return {
+      step: function() {
+        var oldPos = pos;
+        pos = pos.add(v);
+        var speed = v.dist();
+        var dir = v.isZero() ? center.sub(pos).norm() : v.norm();
+        var force = dir.scale(.2*(targetVelocity-speed))
+            .add(dir.right().scale(distraction))
+            .add(V(1/sq(pos.x),1/sq(pos.y)).scale(WALL_FORCE))
+            .add(V(1/sq(width - pos.x),1/sq(height - pos.y)).scale(-WALL_FORCE))
+        v = v.add(force);
+
+        if (random() < .02)
+          distraction = MAX_DISTRACTION * (2*random() - 1);
+        if (random() < .01)
+          targetVelocity = 3 + (12 * random());
+        return oldPos;
+      }
+    }
+  }
+
+  function V(x,y) {
+    var o = {
+      x:x, y:y,
+      add:function(v) { return V(x+v.x,y+v.y) },
+      scale:function(s) { return V(s*x,s*y) },
+      sub:function(v) { return o.add(v.scale(-1)) },
+      dist: function() { return Math.sqrt(x*x+y*y); },
+      norm:function() { return o.scale(1/o.dist()); },
+      isZero:function() { return x==0 && y==0; },
+      right: function() { return V(y, -x); },
+      left: function() { return V(-y, x); },
+      dot: function(v) { return x*v.x + y*v.y; }
+    }
+    return o;
+  }
+
+  </script>
+  <style>
+    body { padding: 0; margin: 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
