@@ -12,8 +12,9 @@ functions are only supported some of the time. Also some sketches did not run fa
 enough to keep from interfering with others, so they have been left out. Links to
 all unaltered sketches are below.
 
+* [acrite22 (1)](http://cha-art-dev.github.io/collaboration-002/acrite22.html)
 * [acrite22 (2)](http://cha-art-dev.github.io/collaboration-002/acrite22-2.html)
-* [acrite22 (3)](http://cha-art-dev.github.io/collaboration-002/acrite22-2.html)
+* [acrite22 (3)](http://cha-art-dev.github.io/collaboration-002/acrite22-3.html)
 * [acruikshank (1)](http://cha-art-dev.github.io/collaboration-002/acruikshank-1.html)
 * [acruikshank (2)](http://cha-art-dev.github.io/collaboration-002/acruikshank-2.html)
 * [acruikshank (3)](http://cha-art-dev.github.io/collaboration-002/acruikshank-3.html)
@@ -24,7 +25,6 @@ all unaltered sketches are below.
 * [HLV3H (2)](http://cha-art-dev.github.io/collaboration-002/HLV3H2random.html)
 * [HLV3H (3)](http://cha-art-dev.github.io/collaboration-002/HLV3H3random.html)
 * [HLV3H (4)](http://cha-art-dev.github.io/collaboration-002/HLV3H4random.html)
-* [HLV3H (2)](http://cha-art-dev.github.io/collaboration-002/HLV3H2random.html)
 * [mhelenm (1)](http://cha-art-dev.github.io/collaboration-002/mhelenm-1.html)
 * [mhelenm (2)](http://cha-art-dev.github.io/collaboration-002/mhelenm-2.html)
 * [mhelenm (3)](http://cha-art-dev.github.io/collaboration-002/mhelenm-3.html)
