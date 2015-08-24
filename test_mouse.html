@@ -1,0 +1,78 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="p5.min.js"></script>
+  <script>
+
+
+  var mouse;
+
+  function setup() {
+    mouse = AutoMouse(800,800,windowWidth/2, windowHeight/2);
+    createCanvas(windowWidth, windowHeight); // don't change this
+    noStroke();
+    fill(0);
+  }
+
+  function draw() {
+    var pos = mouse.step();
+    ellipse(pos.x,pos.y,5,5);
+  }
+
+  function AutoMouse(x,y,centerX, centerY) {
+    var center = V(centerX, centerY);
+    var pos = V(x,y);
+    var v = V(0,0);
+    var targetVelocity = 10;
+    var distraction = .5;
+    var MAX_DISTRACTION = .8;
+    var WALL_FORCE = 10000;
+
+    return {
+      step: function() {
+        var oldPos = pos;
+        pos = pos.add(v);
+        var speed = v.dist();
+        var dir = v.isZero() ? center.sub(pos).norm() : v.norm();
+        var force = dir.scale(.2*(targetVelocity-speed))
+            .add(dir.right().scale(distraction))
+            .add(V(1/sq(pos.x),1/sq(pos.y)).scale(WALL_FORCE))
+            .add(V(1/sq(windowWidth - pos.x),1/sq(windowHeight - pos.y)).scale(-WALL_FORCE))
+        v = v.add(force);
+
+        if (random() < .02)
+          distraction = MAX_DISTRACTION * (2*random() - 1);
+        if (random() < .01)
+          targetVelocity = 15 * random();
+        return oldPos;
+      }
+    }
+  }
+
+  function V(x,y) {
+    var o = {
+      x:x, y:y,
+      add:function(v) { return V(x+v.x,y+v.y) },
+      scale:function(s) { return V(s*x,s*y) },
+      sub:function(v) { return o.add(v.scale(-1)) },
+      dist: function() { return Math.sqrt(x*x+y*y); },
+      norm:function() { return o.scale(1/o.dist()); },
+      isZero:function() { return x==0 && y==0; },
+      right: function() { return V(y, -x); },
+      left: function() { return V(-y, x); },
+      dot: function(v) { return x*v.x + y*v.y; }
+    }
+    return o;
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
