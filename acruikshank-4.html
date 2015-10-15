@@ -1,0 +1,65 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  var lastX, lastY;
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    colorMode(HSB,1);
+    strokeWeight(.5);
+  }
+
+  function draw() {
+    var still = mouseX === lastX && mouseY === mouseY;
+    if (still) {
+      // background(.5,0,.402,random() < .05 ? .5 : .02)
+      return;
+    }
+    // background(.5,0,.4,.02)
+
+    // fill(.5,0,.4,.8)
+    // stroke(1,0,1,1);
+    // var r = lerp(1,800, Math.pow(random(),60));
+    //ellipse(mouseX,mouseY,r,r);
+
+    if (random() < .005)
+      background(.5,0,.4,1);
+
+    noStroke();
+
+    if (lastX > 0) {
+      var dx = mouseX-lastX, dy = mouseY-lastY,
+        dist = 2*Math.floor(Math.sqrt(dx*dx+dy*dy));
+      for (var i=0; i<dist; i++) {
+        var x = lerp(lastX, mouseX, i/(dist-1))
+          + randomGaussian(0,15);
+        var y = lerp(lastY, mouseY, i/(dist-1))
+          + randomGaussian(0,15);
+        r = lerp(1,10, abs(randomGaussian(0,.5)));
+        fill((i*.005 + 10*noise(millis()/100000))%1.0,1,1,1);
+        ellipse(x,y,r,r);
+      }
+    }
+
+    lastX = mouseX;
+    lastY = mouseY;
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>

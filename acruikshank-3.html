@@ -1,0 +1,98 @@
+<html>
+<head>
+  <title>Art / Dev - Collaboration 2</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.4.7/p5.min.js"></script>
+  <script>
+  var IMAGE_WIDTH = 640;    // Don't change this.
+  var IMAGE_HEIGHT = 540;   // Don't change this.
+
+  //=============== DO ALL YOUR WORK HERE =======================
+
+  var DRAW_FRACTION = .8;
+  var RECENTER_FRACTION = .4;
+  var CIRCLE_RADIUS = 150;
+
+  var lastX, lastY;
+  var centerX, centerY;
+  var circles = ModArray(60);
+
+  function ModArray(length) {
+    var index = length, iterator, contents = [];
+    return {
+      push: function(x) { index = (index+length-1)%length; contents[index] = x; },
+      first() { iterator = index; return contents[iterator]; },
+      next() { iterator = (iterator+1)%length;
+        return iterator == index ? null : contents[iterator]; }
+    }
+  }
+
+  function V(x,y) {
+    var o = {
+      x:x, y:y,
+      add:function(v) { return V(x+v.x,y+v.y) },
+      scale:function(s) { return V(s*x,s*y) },
+      sub:function(v) { return o.add(v.scale(-1)) },
+      norm:function() { var d=1/Math.sqrt(x*x+y*y); return o.scale(d); }
+    }
+    return o;
+  }
+
+  function setup() {
+    createCanvas(IMAGE_WIDTH, IMAGE_HEIGHT); // don't change this
+    stroke(255);
+    strokeWeight(.5);
+  }
+
+  function draw() {
+    if (lastX == mouseX && lastY == mouseY)
+      return;
+
+    background(102,102,102,40);
+
+    if (random() < RECENTER_FRACTION || centerX == null) {
+      var circleR = lerp(1.5, CIRCLE_RADIUS, Math.pow(random(),32));
+      centerX = mouseX;
+      centerY = mouseY;
+      circles.push({x:centerX, y:centerY, r:circleR});
+    } else if (random() < DRAW_FRACTION) {
+      var r = lerp(250, 600, pow(random(),6));
+      var theta = lerp(0, 2*Math.PI, random());
+      var x = centerX + r*cos(theta), y = centerY + r*sin(theta);
+      circles.push({x:x, y:y, r:1.5})
+    }
+
+    var clique = [];
+    for (var c=circles.first(); c = circles.next();) {
+      // noFill();
+      strokeWeight(.05);
+      for (var i=Math.max(0,clique.length-4), c2; c2=clique[i]; i++)
+        connect(c, c2);
+
+      fill(102,102,102,100);
+      strokeWeight(1);
+      ellipse(c.x,c.y,2*c.r,2*c.r);
+      clique.push(c);
+    }
+
+    lastX = mouseX;
+    lastY = mouseY;
+  }
+
+  function connect(c1, c2) {
+    var c1v = V(c1.x, c1.y), c2v = V(c2.x, c2.y);
+    var p1 = c1v.add( c2v.sub(c1v).norm().scale(c1.r) );
+    var p2 = c2v.add( c1v.sub(c2v).norm().scale(c2.r) );
+    line(p1.x, p1.y, p2.x, p2.y);
+  }
+
+  // =============== STOP WORKING HERE ==========================
+
+  </script>
+  <style>
+    body { padding: 0; margin: 5% 0 0; background-color: #666;}
+    canvas { margin: 0 auto; display:block; }
+  </style>
+</head>
+<body>
+</body>
+</html>
